@@ -24,19 +24,19 @@ export class Logger {
     // Obtiene la fecha y hora actual del sistema.
     // toLocaleString() la formatea según la configuración regional del equipo.
     // toUpperCase() la convierte a mayúsculas para que se vea uniforme en el log.
-    getTimestamp(){
+    private getTimestamp(){
         return new Date().toLocaleString().toUpperCase();
     }
 
     // Devuelve el color (función de chalk) correspondiente según el nivel del log.
     // Así cada nivel se muestra con un color distinto en consola para identificarlo rápido.
     // Si el nivel no existe en el mapa, usa blanco brillante por defecto (??).
-    getColorByLogLevel(logLevel: LogLevel){
+    private getColorByLogLevel(logLevel: LogLevel){
         let color = {
             [LogLevel.LOG]: chalk.green,           // LOG → verde
             [LogLevel.INFO]: chalk.blue,           // INFO → azul
             [LogLevel.ERROR]: chalk.red,           // ERROR → rojo
-            [LogLevel.VERBOSE]: chalk.cyanBright,  // VERBOSE → cian brillante
+            [LogLevel.VERBOSE]: chalk.gray,  // VERBOSE → gris
             [LogLevel.WARN]: chalk.yellowBright,   // WARN → amarillo brillante
         }
 
@@ -72,6 +72,20 @@ export class Logger {
     // Usa console.log (salida estándar).
     log(message: string, context?: string) {
         console.log(this.formatMessage(message, LogLevel.LOG, context))
+    }
+
+    // Método público para imprimir un mensaje de nivel INFO (información del sistema).
+    // Se usa para comunicar el estado o eventos importantes del módulo/servicio.
+    // Usa console.log (salida estándar), pero con color azul para distinguirlo.
+    info(message: string, context?: string) {
+        console.log(this.formatMessage(message, LogLevel.INFO, context))
+    }
+
+    // Método público para imprimir un mensaje de nivel VERBOSE (detallado/depuración).
+    // Se usa cuando se necesita más detalle del flujo interno (modo verbose).
+    // Usa console.log, pero con color cian brillante para distinguirlo.
+    verbose(message: string, context?: string) {
+        console.log(this.formatMessage(message, LogLevel.VERBOSE, context))
     }
 
     // Método público para imprimir un mensaje de nivel ERROR.
