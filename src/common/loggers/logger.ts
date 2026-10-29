@@ -63,7 +63,7 @@ export class Logger {
         // 6) El texto del mensaje con el color del nivel
         const messageFormat = color(message)
         // 7) Etiqueta del nivel (siempre es "LOG" en este formateador)
-        const logLevelStatus= color("LOG")
+        const logLevelStatus= color(logLevel)
 
         // 8) Une todas las partes en un solo string y lo retorna
         return `${technology} ${PID} ${date} ${logLevelStatus} ${formatContext} ${messageFormat}`;
