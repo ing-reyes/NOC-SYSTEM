@@ -8,6 +8,7 @@ export enum LogLevel {
     INFO = "INFO",       // Información detallada del sistema
     WARN = "WARN",       // Advertencia: algo no crítico pero que conviene revisar
     VERBOSE = "VERBOSE", // Mensaje detallado (modo verbose / depuración)
+    DEBUG = "DEBUG",     // Mensaje de depuración (para rastrear valores internos)
     ERROR = "ERROR",     // Error: algo falló o no se pudo completar
 }
 
@@ -36,7 +37,8 @@ export class Logger {
             [LogLevel.LOG]: chalk.green,           // LOG → verde
             [LogLevel.INFO]: chalk.blue,           // INFO → azul
             [LogLevel.ERROR]: chalk.red,           // ERROR → rojo
-            [LogLevel.VERBOSE]: chalk.gray,  // VERBOSE → gris
+            [LogLevel.VERBOSE]: chalk.gray,        // VERBOSE → gris
+            [LogLevel.DEBUG]: chalk.magentaBright, // DEBUG → magenta brillante
             [LogLevel.WARN]: chalk.yellowBright,   // WARN → amarillo brillante
         }
 
@@ -83,9 +85,17 @@ export class Logger {
 
     // Método público para imprimir un mensaje de nivel VERBOSE (detallado/depuración).
     // Se usa cuando se necesita más detalle del flujo interno (modo verbose).
-    // Usa console.log, pero con color cian brillante para distinguirlo.
+    // Usa console.log, pero con color gris para distinguirlo.
     verbose(message: string, context?: string) {
         console.log(this.formatMessage(message, LogLevel.VERBOSE, context))
+    }
+
+    // Método público para imprimir un mensaje de nivel DEBUG (depuración).
+    // Se usa para rastrear valores internos, variables o el flujo de ejecución
+    // durante el desarrollo. En producción normalmente se desactiva.
+    // Usa console.log, pero con color magenta brillante para distinguirlo.
+    debug(message: string, context?: string) {
+        console.log(this.formatMessage(message, LogLevel.DEBUG, context))
     }
 
     // Método público para imprimir un mensaje de nivel ERROR.
