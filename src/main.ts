@@ -1,10 +1,13 @@
-import { logger } from "./common/loggers/logger";
+import { AppServer } from "./server";
 
 
 
-logger.log("Desde Main", "MainTS")
-logger.info("Desde Main", "MainTS")
-logger.verbose("Desde Main", "MainTS")
-logger.debug("Desde Main", "MainTS")
-logger.warn("Desde Main", "MainTS")
-logger.error("Desde Main", "MainTS")
+
+
+
+function boostrap(){
+    const server = new AppServer();
+    server.run();
+}
+
+boostrap();
