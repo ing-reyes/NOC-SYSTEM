@@ -72,7 +72,7 @@ export class Logger {
 
     // Método público para imprimir un mensaje de nivel LOG (general).
     // Usa console.log (salida estándar).
-    log(message: string, context?: string) {
+    log(message: any, context?: string) {
         console.log(this.formatMessage(message, LogLevel.LOG, context))
     }
 

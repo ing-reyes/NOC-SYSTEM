@@ -2,10 +2,7 @@ import { AppServer } from "./server";
 
 
 
-
-
-
-function boostrap(){
+function boostrap(){    
     const server = new AppServer();
     server.run();
 }
